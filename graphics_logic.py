@@ -9,7 +9,7 @@ import math
 def dda_line(x1, y1, x2, y2):
     """
     Implementação do algoritmo DDA (Digital Differential Analyzer).
-    Usa aritmética de ponto flutuante para calcular os incrementos.
+    Seguindo a implementação do livro texto
     """
     points = []
     length = abs(x2 - x1)
@@ -24,7 +24,7 @@ def dda_line(x1, y1, x2, y2):
     y_inc = (y2 - y1) / length
 
     x, y = x1, y1
-    while (x <= x2):
+    while x <= x2:
         points.append({"x": round(x), "y": round(y)})
         x += x_inc
         y += y_inc
@@ -34,27 +34,31 @@ def dda_line(x1, y1, x2, y2):
 def bresenham_line(x1, y1, x2, y2):
     """
     Implementação do algoritmo de Reta de Bresenham (Ponto Médio).
-    Usa apenas aritmética de inteiros, sendo altamente eficiente.
+    Seguindo a implementação do livro texto.
     """
     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
     points = []
     dx = abs(x2 - x1)
     dy = abs(y2 - y1)
-    sx = 1 if x1 < x2 else -1
-    sy = 1 if y1 < y2 else -1
-    err = dx - dy
+    p = 2 * (dy - dx)
 
-    while True:
-        points.append({"x": x1, "y": y1})
-        if x1 == x2 and y1 == y2:
-            break
-        e2 = 2 * err
-        if e2 > -dy:
-            err -= dy
-            x1 += sx
-        if e2 < dx:
-            err += dx
-            y1 += sy
+    if x1 > x2:
+        x = x2
+        y = y2
+        x2 = 0
+    else:
+        x = x1
+        y = y1
+
+    while x <= x2:
+        points.append({"x": x, "y": y})
+        x += 1
+        if p < 0:
+            p += 2 * dy
+        else:
+            y += 1
+            p += 2 * (dy - dx)
+
     return points
 
 

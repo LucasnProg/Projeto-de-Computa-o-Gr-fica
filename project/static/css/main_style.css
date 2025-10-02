@@ -64,7 +64,7 @@ canvas {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 300px;
+  width: 250px;
   flex-shrink: 0;
 }
 .control-group {
@@ -109,7 +109,7 @@ button:hover {
   resize: vertical; /* Permite que o usuário redimensione a caixa verticalmente */
 }
 .info-panel {
-  width: 280px;
+  width: 250px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;

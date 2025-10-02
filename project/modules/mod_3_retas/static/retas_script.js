@@ -38,18 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateLineInfoPanel = (data_points) => {
         let pointsText = '';
-        if (data_points != null) {
+        if (data_points != null && lineAlgoSelect.value === 'DDA') {
             const points = data_points.points;
             const x_inc = data_points.x_inc;
             const y_inc = data_points.y_inc;
             
 
             pointsText = `x_inc = ${x_inc}\ny_inc = ${y_inc}\n\n` + points.map(p => `(${p.x}, ${p.y})`).join('\n');
-        } else{
+        } else if (data_points != null && lineAlgoSelect.value != 'DDA'){
+            const points = data_points.points;
+            pointsText = points.map(p => `(${p.x}, ${p.y})`).join('\n');
+        }
+        else{
             pointsText = 'Nenhuma reta gerada.';
         }
 
-        
         linePointsInfo.value = pointsText;
     };
 
@@ -67,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const data_points = await response.json();
 
+        console.log("Resposta recebida:", data_points);
         clearAll();
         drawPoints(data_points.points);
         updateLineInfoPanel(data_points);
