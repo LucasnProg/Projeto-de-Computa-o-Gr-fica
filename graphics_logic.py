@@ -116,8 +116,8 @@ def explicit_circle(xc, yc, r):
             y_offset = math.sqrt(y_offset_sq)
             y1, y2 = round(yc + y_offset), round(yc - y_offset)
             x_rounded = round(x)
-            points_dict[f"{x_rounded},{y1}"] = {'x': x_rounded, 'y': y1}
-            points_dict[f"{x_rounded},{y2}"] = {'x': x_rounded, 'y': y2}
+            points_dict[f"{x_rounded},{y1}"] = {"x": x_rounded, "y": y1}
+            points_dict[f"{x_rounded},{y2}"] = {"x": x_rounded, "y": y2}
     return list(points_dict.values())
 
 
@@ -149,6 +149,72 @@ def parametric_circle(xc, yc, r, steps=360):
         circle_points(xc, yc, x, y)
 
     return points
+
+
+def elipse_mid_point(xc, yc, rx, ry):
+    """
+    Implementação do algoritmo Midpoint para Elipses,
+    com a saída formatada como uma lista de dicionários.
+    """
+    pontos = set()
+
+    def round(a):
+        return int(a + 0.5)
+
+    def elipse_points(x, y):
+        # Adiciona os 4 pontos simétricos ao conjunto
+        pontos.add((xc + x, yc + y))
+        pontos.add((xc - x, yc + y))
+        pontos.add((xc + x, yc - y))
+        pontos.add((xc - x, yc - y))
+
+    # --- Inicialização ---
+    rx2 = rx * rx
+    ry2 = ry * ry
+    two_rx2 = 2 * rx2
+    two_ry2 = 2 * ry2
+
+    x = 0
+    y = ry
+    px = 0
+    py = two_rx2 * y
+
+    elipse_points(x, y)
+
+    # --- Região 1 ---
+    p = round(ry2 - (rx2 * ry) + (0.25 * rx2))
+
+    while px < py:
+        x += 1
+        px += two_ry2
+        if p < 0:
+            p += ry2 + px
+        else:
+            y -= 1
+            py -= two_rx2
+            p += ry2 + px - py
+        elipse_points(x, y)
+
+    # --- Região 2 ---
+    p = round(
+        ry2 * (x + 0.5) * (x + 0.5)
+        + rx2 * (y - 1) *
+        (y - 1) - rx2 * ry2)
+
+    while y > 0:
+        y -= 1
+        py -= two_rx2
+        if p > 0:
+            p += rx2 - py
+        else:
+            x += 1
+            px += two_ry2
+            p += rx2 - py + px
+        elipse_points(x, y)
+
+    all_points = [{"x": px, "y": py} for px, py in sorted(list(pontos))]
+
+    return all_points
 
 
 # ===================================================================

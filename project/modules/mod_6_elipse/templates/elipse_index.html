@@ -1,0 +1,45 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Desenho da elipse, pelo algoritmo do ponto médio{% endblock %}
+
+{% block content %}
+<h2>6-Elipse</h2>
+<div class="controls-container">
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Centro (xc, yc):</label>
+            <input type="number" id="center-x" value="0">
+            <input type="number" id="center-y" value="0">
+        </div>
+        <div class="control-group">
+            <label>Rx:</label>
+            <input type="number" id="Rx" value="0">
+            <label>Ry:</label>
+            <input type="number" id="Ry" value="0">
+        </div>
+        <div class="control-group">
+            <label>Algoritmo:</label>
+            <select id="circle-algo">
+                <option value="PontoMedio" selected>Ponto Médio</option>
+            </select>
+        </div>
+        <button id="draw-circle-btn">Desenhar elipse</button>
+    </div>
+
+    <canvas id="canvas-circ" width="600" height="600"></canvas>
+
+    <div class="info-panel">
+        <div class="control-group">
+            <h4>Informações da Elipse</h4>
+            <label>Pontos Gerados (x, y):</label>
+            <textarea id="circ-points-info" class="info-box" readonly>Nenhuma elipse gerada.</textarea>
+            <button id="clear-btn">Limpar</button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_6_elipse.static', filename='elipse_script.js') }}"></script>{% endblock %}

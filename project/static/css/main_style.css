@@ -106,7 +106,7 @@ button:hover {
   overflow-y: auto;
   font-family: monospace;
   font-size: 0.9em;
-  resize: vertical; /* Permite que o usuário redimensione a caixa verticalmente */
+  resize: vertical;
 }
 .info-panel {
   width: 250px;

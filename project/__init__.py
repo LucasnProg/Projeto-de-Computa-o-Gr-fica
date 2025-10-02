@@ -9,11 +9,13 @@ def create_app():
     from .modules.mod_3_retas.routes import retas_bp
     from .modules.mod_4_circunferencia.routes import circ_bp
     from .modules.mod_5_twod.routes import twod_bp
+    from .modules.mod_6_elipse.routes import elipse_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(sc_bp)
     app.register_blueprint(retas_bp)
     app.register_blueprint(circ_bp)
     app.register_blueprint(twod_bp)
+    app.register_blueprint(elipse_bp)
 
     return app
