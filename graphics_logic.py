@@ -68,16 +68,16 @@ def bresenham_line(x1, y1, x2, y2):
 # ===================================================================
 
 
-def bresenham_circle(xc, yc, r):
+def mid_Point_circle(xc, yc, r):
     """
     Implementação do algoritmo de Círculo de Bresenham (Ponto Médio).
-    Usa aritmética de inteiros e simetria de 8 oitantes para máxima eficiência.
+    Usa aritmética de inteiros e simetria de 8 oitantes conforme o livro texto.
     """
     points = []
     x, y = 0, r
     p = 1 - r
 
-    def plot_circle_points(cx, cy, x, y):
+    def circle_points(cx, cy, x, y):
         points.extend(
             [
                 {"x": cx + x, "y": cy + y},
@@ -91,7 +91,7 @@ def bresenham_circle(xc, yc, r):
             ]
         )
 
-    plot_circle_points(xc, yc, x, y)
+    circle_points(xc, yc, x, y)
     while x < y:
         x += 1
         if p < 0:
@@ -99,7 +99,7 @@ def bresenham_circle(xc, yc, r):
         else:
             y -= 1
             p += 2 * (x - y) + 1
-        plot_circle_points(xc, yc, x, y)
+        circle_points(xc, yc, x, y)
     return points
 
 
@@ -116,25 +116,39 @@ def explicit_circle(xc, yc, r):
             y_offset = math.sqrt(y_offset_sq)
             y1, y2 = round(yc + y_offset), round(yc - y_offset)
             x_rounded = round(x)
-            points_dict[f"{x_rounded},{y1}"] = {"x": x_rounded, "y": y1}
-            points_dict[f"{x_rounded},{y2}"] = {"x": x_rounded, "y": y2}
+            points_dict[f"{x_rounded},{y1}"] = {'x': x_rounded, 'y': y1}
+            points_dict[f"{x_rounded},{y2}"] = {'x': x_rounded, 'y': y2}
     return list(points_dict.values())
 
 
-def parametric_circle(xc, yc, r):
+def parametric_circle(xc, yc, r, steps=360):
     """
     Implementação via Equação Paramétrica (Trigonométrica).
     Usa seno e cosseno. Preciso, mas computacionalmente mais custoso.
     """
-    points_dict = {}
-    step = 0.1
-    theta = 0
-    while theta < 2 * math.pi:
-        x = round(xc + r * math.cos(theta))
-        y = round(yc + r * math.sin(theta))
-        points_dict[f"{x},{y}"] = {"x": x, "y": y}
-        theta += step
-    return list(points_dict.values())
+    points = []
+
+    def circle_points(cx, cy, x, y):
+        points.extend(
+            [
+                {"x": cx + x, "y": cy + y},
+                {"x": cx - x, "y": cy + y},
+                {"x": cx + x, "y": cy - y},
+                {"x": cx - x, "y": cy - y},
+                {"x": cx + y, "y": cy + x},
+                {"x": cx - y, "y": cy + x},
+                {"x": cx + y, "y": cy - x},
+                {"x": cx - y, "y": cy - x},
+            ]
+        )
+
+    for i in range(steps // 8 + 1):
+        theta = (math.pi / 4) * i / (steps // 8)
+        x = int(round(r * math.cos(theta)))
+        y = int(round(r * math.sin(theta)))
+        circle_points(xc, yc, x, y)
+
+    return points
 
 
 # ===================================================================
