@@ -1,0 +1,49 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Curvas de Bézier Cúbicas{% endblock %}
+
+{% block content %}
+<h2>13-Curvas de Bézier Cúbicas</h2>
+<p>
+    Baseado no Capítulo 13, Seção 8 (1).pdf"].
+    Clique em 4 pontos no canvas ou digite as coordenadas (x, y) nos campos abaixo.
+</p>
+<div class="controls-container">
+
+    <div class="controls">
+        <div class="control-group">
+            <h4>Pontos de Controle</h4>
+
+            <label>P0 (Início):</label>
+            <input type="text" id="p0-coords" placeholder="(x, y)">
+
+            <label>P1 (Controle 1):</label>
+            <input type="text" id="p1-coords" placeholder="(x, y)">
+
+            <label>P2 (Controle 2):</label>
+            <input type="text" id="p2-coords" placeholder="(x, y)">
+
+            <label>P3 (Fim):</label>
+            <input type="text" id="p3-coords" placeholder="(x, y)">
+
+            <button id="update-from-inputs-btn">Gerar curva</button>
+            <button id="clear-btn">Limpar Pontos</button>
+        </div>
+    </div>
+
+    <canvas id="canvas-bezier" width="700" height="500"></canvas>
+
+    <div class="info-panel">
+        <div class="control-group">
+            <h4>Informações</h4>
+            <textarea id="bezier-info" class="info-box" readonly>
+Clique no canvas para definir o Ponto de Controle P0...
+                </textarea>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_13_bezier.static', filename='bezier_script.js') }}"></script>
+{% endblock %}

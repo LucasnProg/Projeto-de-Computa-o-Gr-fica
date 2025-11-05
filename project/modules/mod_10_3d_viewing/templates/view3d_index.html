@@ -1,0 +1,114 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Visualização 3D (Interativa){% endblock %}
+
+{% block content %}
+    <h2>10-Visualização 3D (Interativa)</h2>
+    <p>
+        Baseado nos Capítulos 8 e 9 (1).pdf"]. 
+        Defina o objeto 3D e aplique transformações cumulativas.
+    </p>
+    <div class="controls-container">
+        
+        <div class="controls">
+            <div class="control-group">
+                <h4>1. Definir Objeto 3D</h4>
+                <label>Vértices (x, y, z) - um por linha:</label>
+                <textarea id="object-vertices" class="info-box" rows="8">-25,-25,-25
+25,-25,-25
+25,25,-25
+-25,25,-25
+-25,-25,25
+25,-25,25
+25,25,25
+-25,25,25</textarea>
+                <label>Arestas (índice 1, índice 2) - um por linha:</label>
+                <textarea id="object-edges" class="info-box" rows="8">0,1
+1,2
+2,3
+3,0
+4,5
+5,6
+6,7
+7,4
+0,4
+1,5
+2,6
+3,7</textarea>
+                <button id="generate-object-btn">Gerar/Resetar Objeto</button>
+            </div>
+
+            <div class="control-group">
+                <h4>2. Aplicar Transformações</h4>
+                
+                <label>Translação (tx, ty, tz):</label>
+                <div>
+                    <input type="number" id="trans-x" value="100">
+                    <input type="number" id="trans-y" value="50">
+                    <input type="number" id="trans-z" value="0">
+                </div>
+                <button id="apply-translation-btn">Aplicar Translação</button>
+                <hr>
+                
+                <label>Escala (sx, sy, sz):</label>
+                <div>
+                    <input type="number" id="scale-x" value="1.2" step="0.1">
+                    <input type="number" id="scale-y" value="1.2" step="0.1">
+                    <input type="number" id="scale-z" value="1.2" step="0.1">
+                </div>
+                <button id="apply-scale-btn">Aplicar Escala</button>
+                <hr>
+
+                <label>Rotação:</label>
+                <div>
+                    <select id="rot-axis">
+                        <option value="Rx">Rotação X</option>
+                        <option value="Ry">Rotação Y</option>
+                        <option value="Rz">Rotação Z</option>
+                    </select>
+                    <input type="number" id="rot-angle" value="15">
+                </div>
+                <button id="apply-rotation-btn">Aplicar Rotação</button>
+                <hr>
+                
+                <label>Cisalhamento (Shear):</label>
+                <div>
+                    <select id="shear-plane">
+                        <option value="Sh_xy">Plano XY (shx, shy)</option>
+                        <option value="Sh_xz">Plano XZ (shx, shz)</option>
+                        <option value="Sh_yz">Plano YZ (shy, shz)</option>
+                    </select>
+                    <input type="number" id="shear-a" value="0.2" step="0.1">
+                    <input type="number" id="shear-b" value="0.2" step="0.1">
+                </div>
+                <button id="apply-shear-btn">Aplicar Cisalhamento</button>
+                <hr>
+
+                <label>Reflexão (Reflection):</label>
+                <div>
+                    <select id="reflect-plane">
+                        <option value="Rf_xy">Plano XY (inverte Z)</option>
+                        <option value="Rf_xz">Plano XZ (inverte Y)</option>
+                        <option value="Rf_yz">Plano YZ (inverte X)</option>
+                    </select>
+                </div>
+                <button id="apply-reflection-btn">Aplicar Reflexão</button>
+                </div>
+        </div>
+
+        <canvas id="canvas-3d" width="600" height="600"></canvas>
+        
+        <div class="info-panel">
+            <div class="control-group">
+                <h4>Histórico de Transformações</h4>
+                <div id="history-log" class="history-box" style="height: 400px;">
+                    </div>
+                <button id="clear-transforms-btn">Resetar Transformações</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_10_3d_viewing.static', filename='view3d_script.js') }}"></script>
+{% endblock %}
