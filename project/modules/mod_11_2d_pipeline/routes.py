@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-import graphics_logic as lg
+from project import graphics_logic as lg
 
 pipeline_bp = Blueprint(
     "mod_11_2d_pipeline",

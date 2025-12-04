@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-import graphics_logic as lg
+from project import graphics_logic as lg
 
 elipse_bp = Blueprint(
     "mod_6_elipse",

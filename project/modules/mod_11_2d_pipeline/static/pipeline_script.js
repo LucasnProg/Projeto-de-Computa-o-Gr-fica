@@ -186,8 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.viewport_polygon && data.viewport_polygon.length > 0) {
                 // Desenha o polígono FINAL, já mapeado para a viewport
                 drawViewportPolygon(data.viewport_polygon, 'black', 'rgba(0,0,0,0.5)');
-                clipInfo.value = `Pipeline concluído.\n` +
-                    `Polígono recortado e mapeado para a Viewport.`;
+                const pointsStr = data.viewport_polygon
+                    .map(p => `(${p.x.toFixed(1)}, ${p.y.toFixed(1)})`)
+                    .join('\n');
+
+                clipInfo.value = `Pipeline concluído.\n${data.viewport_polygon.length} vértices na tela:\n\n${pointsStr}`;
             } else {
                 clipInfo.value = `Pipeline concluído.\nO polígono está totalmente fora da Janela do Mundo.`;
             }
