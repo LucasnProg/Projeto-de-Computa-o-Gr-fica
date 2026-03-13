@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
     <div class="container">
         <aside class="sidebar">
@@ -16,9 +18,16 @@
                     <li><a href="{{ url_for('mod_1_main.index') }}">1 - Tela Principal</a></li>
                     <li><a href="{{ url_for('mod_2_coordenadas.sc_page') }}">2 - Sistemas De Coordenadas</a></li>
                     <li><a href="{{ url_for('mod_3_retas.retas_page') }}">3 - Retas</a></li>
-                    <li><a href="{{ url_for('mod_4_circunferencia.circ_page') }}">4 - Circunferências</a></li>
-                    <li><a href="{{ url_for('mod_5_twod.twod_page') }}">5 - 2D</a></li>
+                    <li><a href="{{ url_for('mod_5_twod.twod_page') }}">4 - 2D</a></li>
+                    <li><a href="{{ url_for('mod_4_circunferencia.circ_page') }}">5 - Circunferências</a></li>
                     <li><a href="{{ url_for('mod_6_elipse.elipse_page') }}">6 - Elipse</a></li>
+                    <li><a href="{{ url_for('mod_7_clipping.clipping_page') }}">7 - Recorte de Linha</a></li>
+                    <li><a href="{{ url_for('mod_8_sutherland_hodgman.sh_page') }}">8 - Recorte Sutherland-Hodgman</a></li>
+                    <li><a href="{{ url_for('mod_9_weiler_atherton.wa_page') }}">9 - Recorte Weiler-Atherton</a></li>
+                    <li><a href="{{ url_for('mod_10_3d_viewing.view3d_page') }}">10 - Visualização 3D</a></li>
+                    <li><a href="{{ url_for('mod_11_2d_pipeline.pipeline_page') }}">11 - Pipeline 2D</a></li>
+                    <li><a href="{{ url_for('mod_12_pdi_transform.pdi_page') }}">12 - PDI Transformações</a></li>
+                    <li><a href="{{ url_for('mod_13_bezier.bezier_page') }}">13 - Curvas de Bézier</a></li>
                 </ul>
             </nav>
         </aside>
@@ -28,4 +37,5 @@
     </div>
     {% block extra_js %}{% endblock %}
 </body>
+
 </html>

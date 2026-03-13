@@ -1,106 +1,130 @@
-# 💻 Projeto de Computação Gráfica com Python e Flask
+# 💻 Projeto de Computação Gráfica (2025)
 
-Uma aplicação web modular que demonstra algoritmos clássicos de computação gráfica. O projeto utiliza um backend em **Python** com o micro-framework **Flask** para realizar os cálculos e servir a aplicação, enquanto o frontend é construído com **HTML, CSS e JavaScript** para a interação do usuário.
+Uma aplicação web modular desenvolvida para demonstrar a implementação prática de algoritmos clássicos de Computação Gráfica. O projeto utiliza **Python (Flask)** no backend para o processamento matemático rigoroso e **JavaScript/HTML5 Canvas** no frontend para renderização e interação.
 
-A arquitetura foi projetada com **Flask Blueprints** para garantir que cada funcionalidade seja organizada em seu próprio módulo, tornando o código limpo e escalável.
-
----
-
-### ✨ Funcionalidades
-
-O projeto é dividido nos seguintes módulos, acessíveis através do menu de navegação lateral:
-
-- ✅ **1-Tela Principal:** Página de boas-vindas da aplicação.
-- ✅ **2-Sistemas de Coordenadas:** Demonstração interativa da conversão entre sistemas de coordenadas (Mundo, Dispositivo, etc.), com lógica executada no frontend para feedback em tempo real.
-- ✅ **3-Retas:** Implementação e visualização dos algoritmos de rasterização de retas **DDA** e **Ponto Médio (Bresenham)**.
-- ✅ **4-Circunferências:** Implementação e visualização do algoritmo de rasterização de circunferências de **Ponto Médio (Bresenham)**.
-- ✅ **5-Transformações 2D:** Aplicação interativa de transformações geométricas (Translação, Escala e Rotação) em um objeto 2D.
+A arquitetura segue o padrão **MVC (Model-View-Controller)** adaptado com **Flask Blueprints**, separando a lógica matemática (`graphics_logic`) das rotas de aplicação.
 
 ---
 
-### 🛠️ Tecnologias Utilizadas
+### ✨ Módulos e Algoritmos Implementados
 
-- **Backend:**
-  - ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
-  - ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-- **Frontend:**
-  - ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-  - ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-  - ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-- **Arquitetura:**
-  - Flask Blueprints para modularização.
-  - Comunicação via API RESTful entre frontend e backend.
+O projeto está dividido em módulos funcionais acessíveis via menu lateral:
 
----
+#### 🟢 Primitivas Gráficas e Rasterização
+- **3. Retas:**
+  - Algoritmo **DDA** (Digital Differential Analyzer).
+  - Algoritmo de **Bresenham** (Ponto Médio) clássico.
+- **4. Circunferências:**
+  - Algoritmo do **Ponto Médio** (Bresenham para Círculos) com simetria de 8 oitantes.
+  - Métodos Explícito e Paramétrico (para comparação).
+- **6. Elipses:**
+  - Algoritmo do **Ponto Médio** para Elipses (divisão em Região 1 e Região 2 baseada no gradiente).
+- **13. Curvas:**
+  - **Curvas de Bézier Cúbicas**: Interpolação suave baseada em 4 pontos de controle.
 
-### 🚀 Como Executar o Projeto
+#### 🔵 Transformações Geométricas
+- **2. Sistemas de Coordenadas:**
+  - Mapeamento entre Coordenadas de Mundo (WC), Normalizadas (NDC) e de Dispositivo (DC).
+- **5. Transformações 2D:**
+  - Translação, Escala, Rotação (com suporte a **Pivô Arbitrário**), Reflexão e Cisalhamento.
+  - Uso de matrizes de transformação homogêneas 3x3.
+- **10. Visualização 3D:**
+  - Manipulação de objetos 3D (Vértices e Arestas).
+  - Transformações 3D (Translação, Escala, Rotação em eixos X/Y/Z, Cisalhamento, Reflexão) usando **Matrizes 4x4**.
+  - Projeção **Perspectiva** e Paralela.
 
-Siga os passos abaixo para rodar a aplicação em seu ambiente local.
+#### 🔴 Recorte (Clipping)
+- **7. Recorte de Linhas:**
+  - Algoritmo de **Cohen-Sutherland** (Códigos de Região Binários).
+- **8. Recorte de Polígonos (Convexos):**
+  - Algoritmo de **Sutherland-Hodgman**.
+- **9. Recorte de Polígonos (Gerais):**
+  - Implementação baseada em **Weiler-Atherton** para recorte de polígonos sujeitos contra janelas de recorte.
+- **11. Pipeline 2D Completo:**
+  - Integração de Recorte (Mundo) -> Mapeamento Window-to-Viewport -> Renderização.
 
-**1. Clone o repositório**
-
-```bash
-git clone [https://github.com/manoelbcruz/Computacao-grafica.git](https://github.com/manoelbcruz/Computacao-grafica.git)
-cd Computacao-grafica
-```
-
-**2. Crie e ative um ambiente virtual**
-
-Isso cria um ambiente isolado para as dependências do projeto.
-
-```bash
-# Crie o ambiente (pode ser necessário usar 'python3')
-python -m venv venv (ou py -m venv venv)
-
-# Ative o ambiente
-# No Windows:
-.\venv\Scripts\activate
-# No macOS/Linux:
-source venv/bin/activate
-```
-
-**3. Instale as dependências**
-
-O arquivo `requirements.txt` lista todas as bibliotecas Python que o projeto precisa (neste caso, o Flask).
-
-> **Nota:** Se você ainda não criou este arquivo, crie-o com o ambiente virtual ativado, usando o comando:
-> `pip freeze > requirements.txt`
-
-Após criar o arquivo, instale as dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-**4. Execute a aplicação**
-
-Com o ambiente virtual ainda ativo, inicie o servidor Flask:
-
-```bash
-python run.py
-```
-
-**5. Acesse no navegador**
-
-O terminal mostrará que o servidor está rodando. Abra seu navegador e acesse a seguinte URL:
-
-[http://127.0.0.1:5001](http://127.0.0.1:5001)
+#### 🖼️ Processamento de Imagens
+- **12. PDI:** Aplicação de filtros e transformações básicas em imagens raster.
 
 ---
 
-### 🛑 Como Parar a Aplicação
+### 🛠️ Arquitetura do Projeto
 
-Quando terminar de usar o projeto, siga estes passos para desligar o servidor e o ambiente virtual de forma segura.
+O código foi refatorado para garantir alta coesão e baixo acoplamento.
 
-**1. Pare o Servidor Flask:**
+```text
+project/
+├── graphics_logic/          # PACOTE DE LÓGICA MATEMÁTICA (Core)
+│   ├── __init__.py          # Exporta funções para os módulos
+│   ├── lines.py             # DDA, Bresenham
+│   ├── circles.py           # Ponto Médio
+│   ├── ellipses.py          # Elipse Ponto Médio
+│   ├── transformations.py   # Matrizes 2D (3x3)
+│   ├── projection.py        # Matrizes 3D (4x4) e Projeção
+│   ├── clipping.py          # Cohen-Sutherland, Sutherland-Hodgman, Weiler-Atherton
+│   ├── bezier.py            # Polinômios de Bernstein
+│   └── coordinates.py       # Conversão WC <-> DC
+│
+├── modules/                 # FLASK BLUEPRINTS (Rotas e Views)
+│   ├── mod_1_main/          # Tela inicial
+│   ├── mod_3_retas/         # Interface para Retas
+│   ├── mod_5_twod/          # Interface para Transformações 2D
+│   ├── mod_10_3d_viewing/   # Interface para 3D
+│   └── ... (outros módulos)
+│
+├── static/                  # CSS e JS Globais
+├── templates/               # Layout Base (Jinja2)
+└── __init__.py              # Fábrica do App Flask
+```
 
-- Volte para a janela do terminal onde o servidor está rodando.
-- Pressione as teclas `Ctrl + C`. Isso interromperá o processo do servidor e devolverá o controle do terminal a você.
+-----
 
-**2. Desative o Ambiente Virtual:**
+### 🚀 Como Executar
 
-- Após parar o servidor, o ambiente virtual ainda estará ativo. Para sair, digite o comando:
-  ```bash
-  deactivate
-  ```
-- O prefixo `(venv)` desaparecerá do seu terminal, indicando que o ambiente foi desativado.
+**Pré-requisitos:** Python 3.10+ instalado.
+
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/LucasnProg/Projeto-de-Computa-o-Gr-fica.git
+    cd Computacao-grafica
+    ```
+
+2.  **Crie e ative o ambiente virtual:**
+
+    ```bash
+    # Windows
+    python -m venv venv
+    .\venv\Scripts\Activate
+
+    # Linux/Mac
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+3.  **Instale as dependências:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Execute o servidor:**
+
+    ```bash
+    python run.py
+    ```
+
+5.  **Acesse no navegador:**
+    Abra [http://127.0.0.1:5001](http://127.0.0.1:5001)
+
+-----
+
+### 📚 Referências Bibliográficas
+
+As implementações matemáticas seguem estritamente as definições acadêmicas encontradas em:
+
+1.  **Hearn, D., & Baker, M. P.** *Computer Graphics with OpenGL*. 4th Edition. Pearson.
+2.  **Foley, J. D., et al.** *Computer Graphics: Principles and Practice*. Addison-Wesley.
+3.  **Anton, H., & Rorres, C.** *Álgebra Linear com Aplicações*. (Para operações matriciais).
+
+-----

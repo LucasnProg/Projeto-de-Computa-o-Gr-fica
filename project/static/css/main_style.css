@@ -16,13 +16,41 @@ body {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+  
+  /* --- ALTERAÇÕES AQUI --- */
+  /* 1. Define a altura máxima para a altura da tela */
+  height: 100vh; 
+  /* 2. Garante que o padding não quebre o layout */
+  box-sizing: border-box; 
+  /* 3. Usa flexbox para organizar o <h3> e <nav> internos */
+  display: flex;
+  flex-direction: column;
+  /* --- FIM DAS ALTERAÇÕES --- */
 }
 .sidebar h3 {
   margin: 0 0 20px 0;
   font-size: 1.5em;
   border-bottom: 1px solid #34495e;
   padding-bottom: 10px;
+  
+  /* --- ALTERAÇÃO AQUI --- */
+  /* Garante que o título não encolha */
+  flex-shrink: 0; 
+  /* --- FIM DA ALTERAÇÃO --- */
 }
+
+/* --- NOVO BLOCO DE CÓDIGO --- */
+.sidebar nav {
+  /* 1. Faz o <nav> ocupar todo o espaço restante */
+  flex-grow: 1;
+  /* 2. A MÁGICA: Adiciona a barra de rolagem vertical */
+  overflow-y: auto;
+  /* 3. Estilo para a barra de rolagem (opcional, mas bonito) */
+  scrollbar-width: thin;
+  scrollbar-color: #34495e #2c3e50;
+}
+/* --- FIM DO NOVO BLOCO --- */
+
 .sidebar nav ul {
   list-style-type: none;
   padding: 0;

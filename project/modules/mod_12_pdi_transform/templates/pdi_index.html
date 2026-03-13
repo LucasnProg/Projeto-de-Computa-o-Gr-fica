@@ -1,0 +1,62 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Transformações Geométricas em Imagens (PDI){% endblock %}
+
+{% block content %}
+    <h2>12-Transformações Geométricas em Imagens (PDI)</h2>
+    <div class="controls-container">
+        
+        <div class="controls">
+            <div class="control-group">
+                <h4>1. Carregar Imagem</h4>
+                <label>Selecione uma imagem (binária/caractere):</label>
+                <input type="file" id="image-upload" accept="image/*">
+            </div>
+
+            <div class="control-group">
+                <h4>2. Aplicar Transformações</h4>
+                
+                <label>Translação (tx, ty):</label>
+                <div><input type="number" id="trans-x" value="50"><input type="number" id="trans-y" value="25"></div>
+                <hr>
+                
+                <label>Escala (sx, sy):</label>
+                <div><input type="number" id="scale-x" value="1.5" step="0.1"><input type="number" id="scale-y" value="1.0" step="0.1"></div>
+                <hr>
+
+                <label>Rotação (Ângulo):</label>
+                <input type="number" id="rot-angle" value="30">
+                <hr>
+                
+                <label>Cisalhamento (shx, shy):</label>
+                <div><input type="number" id="shear-x" value="0.5" step="0.1"><input type="number" id="shear-y" value="0" step="0.1"></div>
+                <hr>
+
+                <label>Reflexão:</label>
+                <div>
+                    <input type="checkbox" id="reflect-x"><label for="reflect-x">Refletir em X</label>
+                    <input type="checkbox" id="reflect-y"><label for="reflect-y">Refletir em Y</label>
+                </div>
+
+            </div>
+             <div class="control-group">
+                <button id="apply-transform-btn">Aplicar Transformações</button>
+                <button id="clear-btn">Resetar</button>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h4>Original</h4>
+            <canvas id="canvas-original" width="300" height="300"></canvas>
+        </div>
+        
+        <div class="control-group">
+            <h4>Transformada</h4>
+            <canvas id="canvas-transform" width="300" height="300"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_12_pdi_transform.static', filename='pdi_script.js') }}"></script>
+{% endblock %}

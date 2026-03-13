@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-import graphics_logic as lg
+from project import graphics_logic as lg
 
 circ_bp = Blueprint(
     "mod_4_circunferencia",
@@ -21,7 +21,6 @@ def api_draw_circle():
     xc, yc, r = int(data["xc"]), int(data["yc"]), int(data["r"])
     algo = data["algo"]
 
-    # Lógica para escolher qual função de cálculo usar
     if algo == "PontoMedio":
         points = lg.mid_Point_circle(xc, yc, r)
     elif algo == "Explicit":
@@ -29,7 +28,6 @@ def api_draw_circle():
     elif algo == "Parametric":
         points = lg.parametric_circle(xc, yc, r)
     else:
-        # Padrão para Bresenham se o algoritmo for desconhecido
-        points = lg.bresenham_circle(xc, yc, r)
+        points = lg.mid_Point_circle(xc, yc, r)
 
     return jsonify(points)

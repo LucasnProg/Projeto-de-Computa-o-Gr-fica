@@ -1,0 +1,55 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Recorte de Linha 2D{% endblock %}
+
+{% block content %}
+    <h2>7-Recorte de Linha (Cohen-Sutherland)</h2>
+    <div class="controls-container">
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Janela de Recorte (Mundo):</label>
+                <label>Xmin, Ymin:</label>
+                <input type="number" id="clip-xmin" value="-100">
+                <input type="number" id="clip-ymin" value="-100">
+                <label>Xmax, Ymax:</label>
+                <input type="number" id="clip-xmax" value="100">
+                <input type="number" id="clip-ymax" value="100">
+            </div>
+
+            <div class="control-group">
+                <label>Ponto 1 da Reta (x1, y1):</label>
+                <input type="number" id="line-x1" value="-150">
+                <input type="number" id="line-y1" value="50">
+            </div>
+            <div class="control-group">
+                <label>Ponto 2 da Reta (x2, y2):</label>
+                <input type="number" id="line-x2" value="150">
+                <input type="number" id="line-y2" value="-50">
+            </div>
+            <button id="clip-line-btn">Recortar e Desenhar</button>
+
+            <div class="control-group">
+                <label>Item 2:</label>
+                <p>Inicia uma linha giratória para testar o recorte em tempo real.</p>
+                <button id="toggle-animation-btn">Aplicar Item 2</button>
+            </div>
+        </div>
+
+        <canvas id="canvas-clipping" width="600" height="600"></canvas>
+        
+        <div class="info-panel">
+            <div class="control-group">
+                <h4>Informações</h4>
+                <label>Resultado:</label>
+                <textarea id="clip-info" class="info-box" readonly>Pronto para recortar.</textarea>
+                <button id="clear-btn">Limpar</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_7_clipping.static', filename='clipping_script.js') }}"></script>
+{% endblock %}

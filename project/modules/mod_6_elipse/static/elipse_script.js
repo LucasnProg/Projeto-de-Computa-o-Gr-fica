@@ -37,12 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateCircInfoPanel = (points) => {
-        if (!points || points.length === 0) {
-            circPointsInfo.value = 'Nenhuma circunferência gerada.';
+        if (!points || !Array.isArray(points) || points.length === 0) {
+            circPointsInfo.value = 'Nenhuma elipse gerada.';
             return;
         }
-        const pointsText = points.map(p => `(${p.x}, ${p.y})`).join('\n');
-        circPointsInfo.value = pointsText;
+        // Limita a exibição para não travar o navegador se forem muitos pontos
+        const limit = 2000; 
+        let pointsText = points.slice(0, limit).map(p => `(${p.x}, ${p.y})`).join('  ');
+        
+        if (points.length > limit) {
+            pointsText += `\n... e mais ${points.length - limit} pontos.`;
+        }
+        
+        circPointsInfo.value = `Total: ${points.length} pontos.\n\n${pointsText}`;
     };
 
     const clearAll = () => {
