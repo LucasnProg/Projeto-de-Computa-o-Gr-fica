@@ -1,0 +1,123 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Transformações 3D{% endblock %}
+
+{% block content %}
+    <h2>Sequência de Transformações e ViewPort 3D</h2>
+    <div class="controls-container">
+        
+        <div class="controls">
+            <div class="control-group">
+                <h4>1. Configurar Objeto 3D</h4>
+                <label>Vértices (x, y, z) - um por linha:</label>
+                <textarea id="object-vertices" class="info-box" rows="8" style="margin-bottom: 10px; background-color: #f0f0f0;" readonly>0,0,0
+80,0,0
+80,80,0
+0,80,0
+0,0,80
+80,0,80
+80,80,80
+0,80,80</textarea>
+                
+                <label>Arestas (índice 1, índice 2) - um por linha:</label>
+                <textarea id="object-edges" class="info-box" rows="8" style="margin-bottom: 10px; background-color: #f0f0f0;" readonly>0,1
+1,2
+2,3
+3,0
+4,5
+5,6
+6,7
+7,4
+0,4
+1,5
+2,6
+3,7</textarea>
+                <button id="generate-object-btn" style="display: none;">Gerar Objeto</button> </div>
+
+            <div class="control-group">
+                <h4>2. Transformações Geométricas</h4>
+                
+                <label>Translação (tx, ty, tz):</label>
+                <div class="input-row">
+                    <input type="number" id="trans-x" value="20" placeholder="Tx">
+                    <input type="number" id="trans-y" value="20" placeholder="Ty">
+                    <input type="number" id="trans-z" value="0" placeholder="Tz">
+                </div>
+                <button id="add-translation-btn">Adicionar Translação</button>
+                
+                <hr style="border-color: #444; margin: 15px 0;">
+                
+                <label>Escala (sx, sy, sz):</label>
+                <div class="input-row">
+                    <input type="number" id="scale-x" value="1.5" step="0.1" placeholder="Sx">
+                    <input type="number" id="scale-y" value="1.5" step="0.1" placeholder="Sy">
+                    <input type="number" id="scale-z" value="1.5" step="0.1" placeholder="Sz">
+                </div>
+                <button id="add-scale-btn">Adicionar Escala</button>
+                
+                <hr style="border-color: #444; margin: 15px 0;">
+                
+                <label>Rotação (Eixo e Ângulo):</label>
+                <div class="input-row">
+                    <select id="rot-axis" style="flex: 1;">
+                        <option value="x">Eixo X</option>
+                        <option value="y">Eixo Y</option>
+                        <option value="z">Eixo Z</option>
+                    </select>
+                    <input type="number" id="rot-angle" value="45" placeholder="Ângulo" style="flex: 1;">
+                </div>
+                <button id="add-rotation-btn">Adicionar Rotação</button>
+            </div>
+
+            <div class="control-group">
+                <label>Reflexão:</label>
+                <div class="input-row">
+                    <select id="reflect-plane" style="width: 100%;">
+                        <option value="xy">Plano XY (inverte Z)</option>
+                        <option value="xz">Plano XZ (inverte Y)</option>
+                        <option value="yz">Plano YZ (inverte X)</option>
+                    </select>
+                </div>
+                <button id="add-reflection-btn" style="margin-top: 10px;">Adicionar Reflexão</button>
+                
+                <hr style="border-color: #444; margin: 15px 0;">
+                
+                <label>Cisalhamento (Eixo e Valores):</label>
+                <div class="input-row">
+                    <select id="shear-axis" style="flex: 2;">
+                        <option value="x">Eixo X (afeta Y e Z)</option>
+                        <option value="y">Eixo Y (afeta X e Z)</option>
+                        <option value="z">Eixo Z (afeta X e Y)</option>
+                    </select>
+                    <input type="number" id="shear-a" value="0.2" step="0.1" placeholder="Val 1" style="flex: 1;">
+                    <input type="number" id="shear-b" value="0.2" step="0.1" placeholder="Val 2" style="flex: 1;">
+                </div>
+                <button id="add-shear-btn">Adicionar Cisalhamento</button>
+            </div>
+        </div>
+
+        <canvas id="canvas-3d" width="600" height="600"></canvas>
+
+        <div class="info-panel">
+            <div class="control-group full-height">                
+                <h4>Fila de Transformações</h4>
+                <textarea id="queue-log" class="info-box" style="flex-grow: 1; margin-bottom: 15px;" readonly>Nenhuma transformação na fila.</textarea>
+                
+                <button id="apply-queue-btn" style="background-color: #28a745; color: white; margin-bottom: 10px;">Aplicar Transformações</button>
+                
+                <div class="input-row" style="gap: 10px;">
+                    <button id="clear-queue-btn">Limpar Fila</button>
+                    <button id="clear-transforms-btn" style="background-color: #dc3545; color: white;">Resetar Objeto</button>
+                </div>
+                <div class="input-row" style="gap: 10px; margin-top: 10px;">
+                    <button id="open-opengl-btn" style="background-color: #2ecc71; color: white; width: 100%;">Visualização 3D (OpenGL)</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('vp_3d.static', filename='view3d_script.js') }}"></script>
+{% endblock %}

@@ -1,7 +1,62 @@
 {% extends "base_layout.html" %}
 {% block title %}Tela Principal{% endblock %}
 {% block content %}
-    <h2>Bem-vindo ao Projeto de Computação Gráfica</h2>
-    <p>Ferramenta interativa de Computação Gráfica para estudo e demonstração de algoritmos clássicos. Permite desenhar primitivas, recortar, transformar objetos 2D/3D, operar sobre imagens binárias e gerar curvas paramétricas, tudo com controles para parâmetros, visualização em janela/world → viewport</p>
-    <p>Use o menu à esquerda para navegar entre as seções.</p>
+<hr>
+
+<h3>Funcionalidades Implementadas</h3>
+
+<div class="feature-section">
+    <h4>1. Rasterização de Primitivas Gráficas</h4>
+    <ul>
+        <li><strong>Desenho de Retas:</strong> Implementação dos algoritmos <strong>DDA</strong> (Digital Differential
+            Analyzer) e <strong>Ponto Médio (Bresenham)</strong> com suporte a todos os oitantes do plano cartesiano.
+        </li>
+        <li><strong>Geração de Círculos:</strong> Comparação entre os métodos da <strong>Equação Explícita</strong>,
+            <strong>Trigonométrico (Paramétrico)</strong> e o algoritmo otimizado do <strong>Ponto Médio</strong>.</li>
+        <li><strong>Geração de Elipses:</strong> Implementação do algoritmo do <strong>Ponto Médio para
+                Elipses</strong>, tratando as variações de inclinação nas Regiões 1 e 2.</li>
+    </ul>
+</div>
+
+<div class="feature-section">
+    <h4>2. Algoritmos de Recorte</h4>
+    <ul>
+        <li><strong>Recorte de Linhas:</strong> Implementação de <strong>Cohen-Sutherland</strong> com demonstração
+            estática e animação interativa de uma linha giratória.</li>
+        <li><strong>Recorte de Polígonos:</strong> Rotinas distintas para os algoritmos de
+            <strong>Sutherland-Hodgman</strong> 
+    </ul>
+</div>
+
+<div class="feature-section">
+    <h4>3. Transformações Geométricas e Visualização</h4>
+    <ul>
+        <li><strong>Transformações 2D e 3D:</strong> Aplicação de matrizes homogêneas para Translação, Escala, Rotação
+            (em eixos X, Y e Z), Reflexão e Cisalhamento.</li>
+        <li><strong>Projeção 3D:</strong> Visualização de poliedros (cubos) através de <strong>Projeção
+                Perspectiva</strong> e mapeamento para planos 2D.</li>
+        <li><strong>Pipeline de Visualização:</strong> Mapeamento completo de <strong>Janela do Mundo (WC) &rarr;
+                Viewport (DC)</strong> com aplicação de recorte integrada.</li>
+    </ul>
+</div>
+
+<div class="feature-section">
+    <h4>4. Processamento Digital de Imagens (PDI)</h4>
+    <ul>
+        <li><strong>Transformações Espaciais:</strong> Aplicação de operadores geométricos (escala, rotação, etc.) em
+            imagens binárias e de caracteres, conforme as definições de processamento raster.</li>
+    </ul>
+</div>
+
+<div class="feature-section">
+    <h4>5. Curvas Paramétricas</h4>
+    <ul>
+        <li><strong>Curvas de Bézier Cúbicas:</strong> Geração de curvas suaves através de polinômios de Bernstein,
+            utilizando quatro pontos de controle definidos pelo usuário.</li>
+    </ul>
+</div>
+
+<p class="instruction-footer">
+    <em>Use o menu à esquerda para navegar entre os módulos e testar cada algoritmo individualmente.</em>
+</p>
 {% endblock %}

@@ -1,36 +1,42 @@
-"""
-MÓDULO: RASTERIZAÇÃO DE CIRCUNFERÊNCIAS
----------------------------------------
-Responsável por desenhar círculos utilizando simetria de 8 pontos.
-Contém:
-- Ponto Médio (Bresenham): Algoritmo otimizado com inteiros.
-- Equação Explícita e Paramétrica: Métodos alternativos para comparação didática.
-
-Utilizado por: Módulo 4 (Circunferências).
-"""
 
 import math
 
 def mid_Point_circle(xc, yc, r):
-    points = []
-    x, y = 0, r
-    p = 1 - r
-    def plot(cx, cy, x, y):
-        points.extend([
-            {"x": cx+x, "y": cy+y}, {"x": cx-x, "y": cy+y},
-            {"x": cx+x, "y": cy-y}, {"x": cx-x, "y": cy-y},
-            {"x": cx+y, "y": cy+x}, {"x": cx-y, "y": cy+x},
-            {"x": cx+y, "y": cy-x}, {"x": cx-y, "y": cy-x}
+
+    def calc_simetry(xin , yin):
+            points.extend([
+            {"x": xc+yin, "y": yc+xin},
+            {"x": xc+yin, "y": yc-xin},
+            {"x": xc+xin, "y": yc-yin},
+            {"x": xc-xin, "y": yc-yin},
+            {"x": xc-yin, "y": yc-xin},
+            {"x": xc-yin, "y": yc+xin},
+            {"x": xc-xin, "y": yc+yin}
         ])
-    plot(xc, yc, x, y)
-    while x < y:
+
+    points = []
+    points_calculed = []
+
+    xc, yc, r = int(xc), int(yc), int(r)
+    x, y = 0, r
+    d = 1 - r
+    
+    points_calculed.append({"x": xc+x, "y": yc+y, "d": d})
+    points.append({"x": xc+x, "y": yc+y})
+    calc_simetry(x,y)
+
+    while y > x:
         x += 1
-        if p < 0: p += 2*x + 1
+        if d < 0: 
+            d += 2*x + 3
         else:
             y -= 1
-            p += 2*(x-y) + 1
-        plot(xc, yc, x, y)
-    return points
+            d += (2*(x-y)) + 5
+        points_calculed.append({"x": xc+x, "y": yc+y , "d": d})
+        points.append({"x": xc+x, "y": yc+y})
+        calc_simetry(x,y)
+
+    return points, points_calculed
 
 def explicit_circle(xc, yc, r):
     points = []

@@ -1,0 +1,48 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Desenho de Circunferências{% endblock %}
+
+{% block content %}
+<h2>Circunferências</h2>
+<div class="controls-container">
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Centro (xc, yc):</label>
+            <div class="input-row">
+                <input type="number" id="circle-xc" value="0" placeholder="Xc">
+                <input type="number" id="circle-yc" value="0" placeholder="Yc">
+            </div>
+        </div>
+        <div class="control-group">
+            <label>Raio (r):</label>
+            <input type="number" id="circle-r" value="150" placeholder="Raio">
+        </div>
+        <div class="control-group">
+            <label>Algoritmo:</label>
+            <select id="circle-algo">
+                <option value="PontoMedio" selected>Ponto Médio</option>
+                <option value="Explicit">Equação Explícita</option>
+                <option value="Parametric">Paramétrico (Trigonométrico)</option>
+            </select>
+        </div>
+        <button id="draw-circle-btn">Desenhar Círculo</button>
+    </div>
+
+    <canvas id="canvas-circ" width="600" height="600"></canvas>
+
+    <div class="info-panel">
+        <div class="control-group full-height">
+            <h4>Informações da Circunferência</h4>
+            <label>Pontos Gerados (x, y):</label>
+            <textarea id="circ-points-info" class="info-box" readonly>Nenhuma circunferência gerada.</textarea>
+            <button id="clear-btn">Limpar Histórico</button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_4_circunferencia.static', filename='circ_script.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Desenho de Retas{% endblock %}
+
+{% block content %}
+    <h2>Retas</h2>
+    <div class="controls-container">
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Ponto 1 (x1, y1):</label>
+                <div class="input-row">
+                    <input type="number" id="line-x1" value="-100" placeholder="X1">
+                    <input type="number" id="line-y1" value="-80" placeholder="Y1">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Ponto 2 (x2, y2):</label>
+                <div class="input-row">
+                    <input type="number" id="line-x2" value="150" placeholder="X2">
+                    <input type="number" id="line-y2" value="120" placeholder="Y2">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Algoritmo:</label>
+                <select id="line-algo">
+                    <option value="DDA" selected>DDA</option>
+                    <option value="Bresenham">Ponto Médio (Bresenham)</option>
+                </select>
+            </div>
+            <button id="draw-line-btn">Desenhar Reta</button>
+        </div>
+
+        <canvas id="canvas-retas" width="600" height="600"></canvas>
+        
+        <div class="info-panel">
+            <div class="control-group full-height">
+                <h4>Informações da Reta</h4>
+                <label>Pontos Gerados (x, y):</label>
+                <textarea id="line-points-info" class="info-box" readonly>Nenhuma reta gerada.</textarea>
+                <button id="clear-btn">Limpar Tela</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}<script src="{{ url_for('mod_3_retas.static', filename='retas_script.js') }}"></script>{% endblock %}

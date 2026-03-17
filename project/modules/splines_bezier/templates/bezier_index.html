@@ -1,0 +1,60 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Curvas de Bézier{% endblock %}
+
+{% block content %}
+    <h2>Curvas de Bézier </h2>
+    <div class="controls-container">
+        
+        <div class="controls">
+            <div class="control-group">
+                <h4>Definir Pontos de Controle</h4>
+                <p style="font-size: 0.9em; color: #666; margin-bottom: 15px;">Insira as coordenadas ou clique no canvas.</p>
+                
+                <label>P0 (Início):</label>
+                <div class="input-row">
+                    <input type="number" id="p0-x" placeholder="X">
+                    <input type="number" id="p0-y" placeholder="Y">
+                </div>
+
+                <label>P1 (Controle 1):</label>
+                <div class="input-row">
+                    <input type="number" id="p1-x" placeholder="X">
+                    <input type="number" id="p1-y" placeholder="Y">
+                </div>
+
+                <label>P2 (Controle 2):</label>
+                <div class="input-row">
+                    <input type="number" id="p2-x" placeholder="X">
+                    <input type="number" id="p2-y" placeholder="Y">
+                </div>
+
+                <label>P3 (Fim):</label>
+                <div class="input-row">
+                    <input type="number" id="p3-x" placeholder="X">
+                    <input type="number" id="p3-y" placeholder="Y">
+                </div>
+
+                <button id="update-from-inputs-btn" style="margin-top: 10px;">Gerar Curva</button>
+            </div>
+        </div>
+
+        <canvas id="canvas-bezier" width="600" height="600"></canvas>
+
+        <div class="info-panel">
+            <div class="control-group full-height">
+                <h4>Informações da Curva</h4>
+                
+                <label>Status e Coordenadas:</label>
+                <textarea id="bezier-info" class="info-box" style="flex-grow: 1; margin-bottom: 15px;" readonly>Clique no canvas para definir o Ponto de Controle P0 (Início)...</textarea>
+                
+                <button id="clear-btn" style="background-color: #dc3545; color: white;">Limpar Pontos e Canvas</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('mod_13_bezier.static', filename='bezier_script.js') }}"></script>
+{% endblock %}
